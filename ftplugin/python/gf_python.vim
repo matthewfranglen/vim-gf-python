@@ -1,0 +1,26 @@
+" gf_python.vim - Execute text as shell commands
+" Maintainer: Matthew Franglen
+" Version:    0.0.7
+
+if exists('g:loaded_gf_python') || &compatible
+  finish
+endif
+let g:loaded_gf_python = 1
+
+function! g:ToPythonPath(module) abort
+    let path_name = substitute(a:module,'\.','/','g')
+
+    for p in split(&path, ',')
+        for name in [path_name, path_name . '.py', path_name . '/__init__.py']
+            if filereadable(p . '/' . name)
+                return name
+            endif
+        endfor
+    endfor
+
+    return path_name
+endfunction
+
+let &path = system("python -c 'import os.path, sys; sys.stdout.write(\",\".join(os.path.abspath(path) for path in sys.path if os.path.isdir(path)))'")
+let &suffixesadd = '.py,/__init__.py'
+set includeexpr=g:ToPythonPath(v:fname)

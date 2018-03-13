@@ -1,0 +1,10 @@
+*gf_python.txt*    Plugin that fixes the path for python
+
+==============================================================================
+Author:  Matthew Franglen <matthew.franglen+shellvim@gmail.com> *shell-author*
+License: Same terms as Vim itself (see |license|)
+
+==============================================================================
+
+This updates the gf command to use the current python path as well as finding
+__init__.py files.
