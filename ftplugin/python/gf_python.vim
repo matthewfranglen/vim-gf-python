@@ -8,7 +8,7 @@ endif
 let g:loaded_gf_python = 1
 
 function! ToPythonPath(module) abort
-    let path_name = substitute(a:module,'\.','/','g')
+    let path_name = substitute(a:module, '\.', '/', 'g')
 
     for p in split(&path, ',')
         for name in [path_name, path_name . '.py', path_name . '/__init__.py']
