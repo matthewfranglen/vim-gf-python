@@ -7,7 +7,7 @@ if exists('g:loaded_gf_python') || &compatible
 endif
 let g:loaded_gf_python = 1
 
-function! g:ToPythonPath(module) abort
+function! ToPythonPath(module) abort
     let path_name = substitute(a:module,'\.','/','g')
 
     for p in split(&path, ',')
@@ -21,6 +21,6 @@ function! g:ToPythonPath(module) abort
     return path_name
 endfunction
 
-let &path = system("python -c 'import os.path, sys; sys.stdout.write(\",\".join(os.path.expanduser(path) for path in sys.path if os.path.isdir(path)))'")
+let &path = system("python -c 'import os.path, sys; sys.stdout.write(\",\".join(path for path in sys.path if os.path.isdir(path)))'")
 let &suffixesadd = '.py,/__init__.py'
-set includeexpr=g:ToPythonPath(v:fname)
+set includeexpr=ToPythonPath(v:fname)
