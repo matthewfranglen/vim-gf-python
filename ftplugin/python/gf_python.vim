@@ -21,6 +21,6 @@ function! ToPythonPath(module) abort
     return path_name
 endfunction
 
-let &path = system("python -c 'import os.path, sys; sys.stdout.write(\",\".join(path for path in sys.path if os.path.isdir(path)))'")
-let &suffixesadd = '.py,/__init__.py'
-set includeexpr=ToPythonPath(v:fname)
+let &l:path = system("python -c 'import os.path, sys; sys.stdout.write(\",\".join(path for path in sys.path if os.path.isdir(path)))'")
+let &l:suffixesadd = '.py,/__init__.py'
+let &l:includeexpr = 'ToPythonPath(v:fname)'
